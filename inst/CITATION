@@ -8,8 +8,7 @@ citEntry(entry = "Article",
   volume       = "46",
   number       = "8",
   pages        = "1--20",
-  url          = "http://www.jstatsoft.org/v46/i08/",
-
+  doi          = "10.18637/jss.v046.i08",
   textVersion  =
   paste("Robin K. S. Hankin (2012).",
         "Introducing multivator: A Multivariate Emulator.",
