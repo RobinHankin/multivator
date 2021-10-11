@@ -12,5 +12,5 @@ License: GPL-2
 LazyLoad: yes
 LazyData: yes
 URL: https://github.com/RobinHankin/multivator
-BugReports: https://github.com/RobinHankin/disordR/multivator
+BugReports: https://github.com/RobinHankin/multivator
 RdMacros: mathjaxr
