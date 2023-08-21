@@ -4,7 +4,7 @@
 \docType{package}
 \title{A multivariate emulator}
 \description{\loadmathjax
-\packageDescription{stokes}
+\packageDescription{multivator}
 }
 \details{
 
