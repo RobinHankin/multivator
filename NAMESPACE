@@ -1,8 +1,9 @@
 exportPattern("^[^\\.]")
-importFrom("utils", head, tail)
-import("mvtnorm")
-import("methods")
 
+
+import("methods")
+ importFrom("mvtnorm", rmvnorm)
+ importFrom("utils", head, tail)
  importFrom("emulator", corr.matrix, latin.hypercube, sigmahatsquared, scales.likelihood, optimal.scale, optimal.scales)
  importFrom("quadform", quad.form, quad3.form, quad.form.inv)
  importFrom("grDevices", "heat.colors", "terrain.colors")
