@@ -3,7 +3,7 @@
 \alias{multivator}
 \docType{package}
 \title{A multivariate emulator}
-\description{\loadmathjax
+\description{
 \packageDescription{multivator}
 }
 \details{

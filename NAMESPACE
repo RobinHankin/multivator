@@ -2,8 +2,6 @@ exportPattern("^[^\\.]")
 importFrom("utils", head, tail)
 import("mvtnorm")
 import("methods")
-import("mathjaxr")
-
 
  importFrom("emulator", corr.matrix, latin.hypercube, sigmahatsquared, scales.likelihood, optimal.scale, optimal.scales)
  importFrom("quadform", quad.form, quad3.form, quad.form.inv)

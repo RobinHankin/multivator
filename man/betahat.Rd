@@ -71,7 +71,7 @@ var.matrix(x1,x2=x1,hp, ...)
     
     The equation for \code{var.matrix()} is
   
-  \mjdeqn{
+  \deqn{
     c^*\left(x,x'\right)=
     c\left(x,x'\right) - t(x)^TA^{-1}t(x') + \left\lbrace h(x)^T - t(x)^TA^{-1}H\right\rbrace
     \left(H^TA^{-1}H\right)^{-1}\left\lbrace h(x')^T -
