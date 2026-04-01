@@ -264,10 +264,10 @@ sqrt((1/det(Sigma)) / det(quad.form.inv(Sigma,H))) *
   Hx2 <- regressor(x2,LoF=LoF)
   
   bit1 <- var.matrix(x1=x1,x2=x2,hp,...)
-  bit2 <- quad.3form(Sigmainv, TEEx1, TEEx2)
+  bit2 <- quad3.form(Sigmainv, TEEx1, TEEx2)
 
-  jjleft  <- Hx1 - quad.3form(Sigmainv, TEEx1, H)
-  jjright <- Hx2 - quad.3form(Sigmainv, TEEx2, H)
+  jjleft  <- Hx1 - quad3.form(Sigmainv, TEEx1, H)
+  jjright <- Hx2 - quad3.form(Sigmainv, TEEx2, H)
 
   bit3 <- jjleft %*% tcrossprod(solve(quad.form(Sigmainv, H)), jjright)
   
