@@ -1,7 +1,6 @@
 exportPattern("^[^\\.]")
 
-
-import("methods")
+ importFrom("methods", "as", "is", "new")
  importFrom("mvtnorm", rmvnorm)
  importFrom("utils", head, tail)
  importFrom("emulator", corr.matrix, latin.hypercube, sigmahatsquared, scales.likelihood, optimal.scale, optimal.scales)
