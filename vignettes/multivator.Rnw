@@ -31,7 +31,7 @@
 \newcommand{\ethreemg}{\proglang{E3MG}}
 
 %% just as usual
-\author{Robin K. S. Hankin\\Auckland University of Technology}
+\author{Robin K. S. Hankin\\University of Stirling}
 \title{Introducing \pkg{multivator}: A Multivariate Emulator}
 %\VignetteIndexEntry{The multivator package}
 
