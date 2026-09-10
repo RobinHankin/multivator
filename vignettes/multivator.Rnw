@@ -841,7 +841,7 @@ the toy example considered here.
 
 \section{The package in use}
 
-The \pkg{multivator} package of~\proglang{R}~\citep{rcore2011}
+The \pkg{multivator} package of~\proglang{R}~\citep{rcore2026}
 routines is now demonstrated using three examples: A toy dataset in
 which the underlying assumptions are \emph{known} to be true;
 evaluates of a simple function, following~\citet{oakley1999}; and a
