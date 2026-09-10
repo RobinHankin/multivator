@@ -70,6 +70,7 @@ exportMethods(show)
 exportMethods(tail)
 exportMethods(types)
 exportMethods(xold)
+import(methods)
 importFrom(emulator,
   corr.matrix,
   latin.hypercube,

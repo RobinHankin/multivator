@@ -6,6 +6,9 @@
 #' @importFrom grDevices heat.colors terrain.colors
 #' @importFrom graphics axis contour filled.contour title
 #' @importFrom stats optim sd
+#' @import methods
+NULL
+
 
 #' @export
 "ipd" <- function(mat){ # "ipd" == "Is Positive Definite"
