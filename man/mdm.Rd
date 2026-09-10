@@ -34,6 +34,13 @@
 \alias{as.data.frame,mhp-method}
 \alias{as.data.frame,mdm,missing,missing-method}
 \alias{rbind,mdm-method}
+\alias{coerce,experiment,data.frame-method}
+\alias{coerce,experiment,mhp-method}
+\alias{show,experiment-method}
+\alias{coerce,mdm,data.frame-method}
+\alias{coerce,mdm,list-method}
+\alias{coerce,mdm,matrix-method}
+\alias{coerce,mdm,mhp-method}
 \alias{rbind}
 \title{
 Multivariate design matrices
