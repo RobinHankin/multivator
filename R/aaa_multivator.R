@@ -1,3 +1,13 @@
+#' @importFrom methods as is new
+#' @importFrom mvtnorm rmvnorm
+#' @importFrom utils head tail
+#' @importFrom emulator corr.matrix latin.hypercube sigmahatsquared scales.likelihood optimal.scale optimal.scales
+#' @importFrom quadform quad.form quad3.form quad.form.inv
+#' @importFrom grDevices heat.colors terrain.colors
+#' @importFrom graphics axis contour filled.contour title
+#' @importFrom stats optim sd
+
+#' @export
 "ipd" <- function(mat){ # "ipd" == "Is Positive Definite"
   if(nrow(mat) != ncol(mat)){
     print("not square")
@@ -13,6 +23,7 @@
   }
 }
 
+#' @export
 "ss" <- function(A,B,Ainv,Binv){
   if(missing(Ainv) | missing(Binv)){
     return((det(crossprod((A+B)/2,(solve(A)+solve(B))/2)))^(-0.25))
@@ -21,6 +32,7 @@
   }
 }
 
+#' @export
 "ss_matrix_simple" <- function(hp,useM=TRUE){
   k <- length(levels(hp))
   B <- B(hp)
@@ -38,6 +50,7 @@
   return(out)
 }
 
+#' @export
 "ss_matrix" <- function(hp,useM=TRUE){
   stopifnot(is.mhp(hp))
   M <- M(hp)
@@ -75,6 +88,7 @@
   return(out)
 }
 
+#' @export
 "default_LoF" <- function(x){
   f <- function(y){
       out <- c(1,y)
@@ -87,6 +101,7 @@
   return(LoF)
 }
 
+#' @export
 "as.separate" <- function(expt){
   x <- get_mdm(expt)
   d <- get_obs(expt)
@@ -105,6 +120,7 @@
     return(out) 
 }
 
+#' @export
 "regressor"  <- function(x, LoF=NULL){
 
   if(is.null(LoF)){  # as opposed to a list of functions
@@ -152,6 +168,7 @@
   return(out)
 }
 
+#' @export
 "var.matrix" <- function(x1,x2=x1,hp, ...){
 
   stopifnot(is.mdm(x1))
@@ -190,6 +207,7 @@
   return(Sigma)
 }
 
+#' @export
 "beta_hat" <- function(expt,hp,LoF,...){
   if(missing(LoF)){LoF <- default_LoF(expt)}
   mm <- get_mdm(expt)
@@ -197,18 +215,21 @@
   betahat_mult_Sigma(H=regressor(mm,LoF), Sigma=var.matrix(x1=mm,hp=hp,...), d=d)
 }
 
+#' @export
 "betahat_mult"  <- function(H, Sigmainv, d){
   out <- as.vector(solve(quad.form(Sigmainv, H), crossprod(crossprod(Sigmainv, H), d)))
   names(out) <- colnames(H)
   return(out)
 }
 
+#' @export
 "betahat_mult_Sigma" <- function(H, Sigma, d){
   out <- as.vector(solve(quad.form.inv(Sigma, H), crossprod(H, solve(Sigma, d))))
   names(out) <- colnames(H)
   return(out)
 }
 
+#' @export
 "eq2.36" <- function(H, Sigmainv, d, log=TRUE){
   f <- function(m){ c(determinant(m,logarithm=TRUE)$modulus) }
     
@@ -222,12 +243,14 @@
   }
 }
 
+#' @export
 "eq2.36_Sigma" <- function(H, Sigma, d){
 betahat <- betahat_mult_Sigma(H,Sigma,d)
 sqrt((1/det(Sigma)) / det(quad.form.inv(Sigma,H))) * 
   exp( -0.5*quad.form.inv(Sigma,   d-H %*% betahat))
 }
 
+#' @export
 "compatible"  <- function(x1, x2){
   if(
      identical( names(x1), names(x2)) & 
@@ -239,6 +262,7 @@ sqrt((1/det(Sigma)) / det(quad.form.inv(Sigma,H))) *
   }
 }
 
+#' @export
 "cstar" <- function(x1, x2=x1, expt, hp, LoF=NULL, Sigmainv=NULL, ...){ # x -> x1;  xdash -> x2
 
   x <- get_mdm(expt)
@@ -275,6 +299,7 @@ sqrt((1/det(Sigma)) / det(quad.form.inv(Sigma,H))) *
 }
 
 
+#' @export
 "multem" <- function(x, expt, hp=NULL, LoF=NULL, give=FALSE, Sigmainv=NULL, ...){  # 'multem' == 'MULTivariate EMulator'
 
   x_known <- get_mdm(expt)
@@ -311,6 +336,7 @@ sqrt((1/det(Sigma)) / det(quad.form.inv(Sigma,H))) *
   }
 } 
 
+#' @export
 "obs_maker" <- function(x, hp, LoF, beta, Sigma=NULL, ...){
   if(is.null(Sigma)){Sigma <- var.matrix(x1=x, hp=hp, ...)}
   d <- rmvnorm(n=1, mean=regressor(x, LoF)%*% beta, sigma=Sigma)
@@ -319,6 +345,7 @@ sqrt((1/det(Sigma)) / det(quad.form.inv(Sigma,H))) *
   return(d)
 }
 
+#' @export
 "toy_mm_maker" <- function(na,nb,nc,include_first=TRUE){
   
   out <- latin.hypercube(na+nb+nc,4)
@@ -355,6 +382,7 @@ sqrt((1/det(Sigma)) / det(quad.form.inv(Sigma,H))) *
   mdm(out,jjtypes)
 }
 
+#' @export
 "optimal_B" <- function(expt, LoF, start_hp, option='a', verbose=FALSE, ...){ # returns a B
 
   mm <- get_mdm(expt)
@@ -390,6 +418,7 @@ sqrt((1/det(Sigma)) / det(quad.form.inv(Sigma,H))) *
   return(B)
 }
 
+#' @export
 "optimal_identical_B" <- function(expt, LoF, start_hp, verbose=FALSE, ...){
   seps <- as.separate(expt)
   p <- length(seps)
@@ -412,6 +441,7 @@ sqrt((1/det(Sigma)) / det(quad.form.inv(Sigma,H))) *
   }
 }
 
+#' @export
 "optimal_diag_M" <- function(expt, LoF, start_hp){
                                         # This means the diagonal of
                                         # the *M* matrix: the marginal
@@ -450,6 +480,7 @@ sqrt((1/det(Sigma)) / det(quad.form.inv(Sigma,H))) *
   return(shs) # ie a vector
 }
  
+#' @export
 "optimal_M" <- function(expt, LoF, start_hp, ...){
                                         #analysis conditional on
                                         #B(start_hp) [determined from
@@ -501,6 +532,7 @@ sqrt((1/det(Sigma)) / det(quad.form.inv(Sigma,H))) *
   return(make_M(opt_vec$par))
 }
     
+#' @export
 "optimal_params" <- function(expt, LoF, start_hp, option='a', ...){
 
   mm <- get_mdm(expt)
@@ -529,6 +561,7 @@ sqrt((1/det(Sigma)) / det(quad.form.inv(Sigma,H))) *
   return(out)
 }
 
+#' @export
 "apart" <- function(X, dependent,use_rownames=TRUE){
   if(is.logical(dependent)){dependent <- which(dependent)}
   xold <- X[,-dependent,drop=FALSE]
@@ -549,6 +582,7 @@ sqrt((1/det(Sigma)) / det(quad.form.inv(Sigma,H))) *
               ))
 }
 
+#' @export
 "showmap" <- function(z, pc,  landmask, ...){
   long <- seq(from=2.81,to=357,length.out=64)
   lat  <- c(-79.811531,seq(from=-74.81,to=86,len=30),86.6)

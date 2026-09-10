@@ -5,24 +5,33 @@ setClass("mdm", # "mdm" == "multivariate design matrix"
            )
          )
 
+#' @export
 "mdm" <- function(xold,type){new("mdm", xold=xold, types=types)}
 
+#' @export
 setGeneric("xold", function(x){standardGeneric("xold")})
+
+#' @export
 setGeneric("xold<-", function(x,value){standardGeneric("xold<-")})
+
+#' @export
 setGeneric("levels",function(x){standardGeneric("levels")})
 ### types() and names() already generic (in mhp.R)
 
 
+#' @export
 setMethod("xold","mdm",function(x){x@xold})
+
+#' @export
 setMethod("types","mdm",function(x){x@types})
 ### No occurrences of "@" below this line.
 
-
+#' @export
 setMethod("types<-","mdm",function(x,value){
   mdm(xold=xold(x),types=value)
 } )
 
-
+#' @export
 setMethod("xold<-","mdm",function(x,value){
   jj <- xold(x)
   jj[] <- value
@@ -30,7 +39,10 @@ setMethod("xold<-","mdm",function(x,value){
 } )
 
 
+#' @export
 setMethod("levels","mdm",function(x){levels(types(x))})
+
+#' @export
 setMethod("levels<-","mdm",function(x,value){
   jj <- types(x)
   levels(jj) <- value
@@ -38,8 +50,10 @@ setMethod("levels<-","mdm",function(x,value){
 } )
 
 
+#' @export
 setMethod("names","mdm",function(x){colnames(xold(x))})
 
+#' @export
 setMethod("names<-","mdm",function(x,value){
   jj <- xold(x)
   colnames(jj) <- value
@@ -57,16 +71,19 @@ setMethod("names<-","mdm",function(x,value){
 
 setValidity("mdm", .mdm_valid)
 
+#' @export
 "mdm" <- function(xold, types){ 
   new("mdm" , xold=xold,types=as.factor(types))
 # This is the only place new("mdm", ...) is called
 }
 
+#' @export
 "as.mdm" <- function(x,  ...){
     n <- ncol(x)
     mdm(x[,-n], types=as.factor(x[,n,drop=TRUE]))
 }
 
+#' @export
 is.mdm <- function(x){inherits(x,"mdm")}
 
 setAs("mdm","matrix", function(from){
@@ -84,32 +101,45 @@ setAs("mdm","list",function(from){
   return(jj)
  } )
 
+#' @export
 setGeneric("as.list")
+
+#' @export
 setMethod("as.list","mdm", function(x){as(x,"list")})
 
 ".mdm_print" <- function(x, ...){
   data.frame(xold(x),type=types(x))
 }
     
+#' @export
 "print.mdm" <- function(x, ...){
   jj <- .mdm_print(x, ...)
   print(jj)
   return(invisible(jj))
 }
 
+#' @export
 setMethod("show", "mdm", function(object){print.mdm(object)})
 
 setAs("mdm","data.frame",function(from){
   data.frame(xold(from),type=types(from))
 })
 
+#' @export
 setGeneric("as.data.frame")
+
+#' @export
 setMethod("as.data.frame",signature=c("mdm","missing","missing"),function(x,row.names=NULL,optional=TRUE, ...){as(x,"data.frame")})
 
+#' @export
 setGeneric("rownames")
+
+#' @export
 setMethod("rownames","mdm",function(x, do.NULL=TRUE,prefix="row"){rownames(xold(x))})
 
+#' @export
 setGeneric("rownames<-")
+
 setMethod("rownames<-","mdm",function(x, value){
   jj <- xold(x)
   rownames(jj) <- value
@@ -143,11 +173,16 @@ setGeneric("nrow")
 setGeneric("ncol")
 setGeneric("dim" )
 
+#' @export
 setMethod("nrow",signature=c("mdm"),function(x){nrow(xold(x))})
+
+#' @export
 setMethod("ncol",signature=c("mdm"),function(x){ncol(xold(x))})
+
+#' @export
 setMethod("dim" ,signature=c("mdm"),function(x){ dim(xold(x))})
 
-
+#' @export
 setAs("mdm","mhp",function(from){
   levs <- levels(from)
   nams <- names(from)
@@ -156,18 +191,24 @@ setAs("mdm","mhp",function(from){
   return(mhp(M,B,levels=levs,names=nams))
 } )
 
+#' @export
 setGeneric("as.mhp", function(x){standardGeneric("as.mhp")})
+
+#' @export
 setMethod("as.mhp","mdm",function(x){as(x,"mhp")})
 
+#' @export
 setMethod("head",signature="mdm",function(x,n=6,...){
   mdm(head(xold(x),n=n,...) , types=factor(head(types(x),n=n,...)))
 } )
 
+#' @export
 setMethod("tail",signature="mdm",function(x,n=6,...){
   mdm(tail(xold(x),n=n,...) , types=factor(tail(types(x),n=n,...)))
 } )
 
 # following lines copied from the Brobdingnag c() and .cPair() functions:
+
 setGeneric(".mdm_rbind_pair", function(x,y,deparse.level){standardGeneric(".mdm_rbind_pair")})
 setMethod (".mdm_rbind_pair", c("mdm", "mdm"), function(x,y,deparse.level){.mdm_rbind(x,y,deparse.level)})
 setMethod (".mdm_rbind_pair", c("mdm", "ANY"), function(x,y,deparse.level){.mdm_rbind_error(x,y)})
@@ -186,10 +227,12 @@ setMethod (".mdm_rbind_pair", c("ANY", "ANY"), function(x,y,deparse.level){.mdm_
 }
 
 # Thanks to Martin Morgan for supplying the following setGeneric():
+#' @export
 setGeneric("rbind",
     function(..., deparse.level=1) standardGeneric("rbind"),
     signature = "...")
 
+#' @export
 setMethod("rbind", signature="mdm", function(x, ..., deparse.level=1) {
   if(nargs()<4)
     .mdm_rbind_pair(x, ..., deparse.level=deparse.level)

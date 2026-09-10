@@ -7,6 +7,7 @@ setClass("mhp",  # "mhp" ==  "Multivariate HyperParameters"
            )
          )
 
+#' @export
 "mhp" <- function(M,B,levels=NULL,names=NULL){
   if(is.null(names)){
       names <- dimnames(B)[[1]]
@@ -30,11 +31,13 @@ setClass("mhp",  # "mhp" ==  "Multivariate HyperParameters"
                                                     # new("mhp",...)
 }
 
+#' @export
 "is.mhp" <- function(x){is(x,"mhp")}
 
 setGeneric("levels",function(x){standardGeneric("levels")})
 setMethod("levels","mhp",function(x){x@levels})
 
+#' @export
 "M" <- function(x){
   stopifnot(is.mhp(x))
   out <-   x@M
@@ -43,6 +46,7 @@ setMethod("levels","mhp",function(x){x@levels})
   return(out)
 } 
           
+#' @export
 "B" <- function(x){
   stopifnot(is.mhp(x))
   out <- x@B
@@ -90,11 +94,13 @@ setMethod("types","mhp",function(x){stop("do not use types() on an mhp object.  
 setGeneric("types<-",function(x,value){standardGeneric("types<-")})
 setGeneric("names<-")
 
+#' @export
 "M<-" <- function(x,value){
   stopifnot(is.mhp(x))
   mhp(M=value, B=B(x), levels(x), names=names(x))
 } 
 
+#' @export
 "B<-" <- function(x,value){
   stopifnot(is.mhp(x))
   mhp(M=M(x), B=value, levels(x), names=names(x))
@@ -112,6 +118,7 @@ setMethod("names<-","mhp",function(x,value){
   list(M=M(x),B=B(x))
 }
     
+#' @export
 "print.mhp" <- function(x, ...){
   jj <- .mhp_print(x, ...)
   print(jj)
@@ -144,6 +151,7 @@ setMethod("summary", signature(object = "mhp"),
             }
           })
 
+#' @export
 print.mhpSummary <- function (x, ...) {
   cat('overall covariance matrix M:\n\n')
   print(x[[1]])

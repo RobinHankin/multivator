@@ -3,7 +3,10 @@ setClass("experiment",
            mm  = "mdm",
            obs = "numeric")
          )
+#' @export
 "get_mdm" <- function(x){x@mm}
+
+#' @export
 "get_obs" <- function(x){x@obs}
 
 # there are no occurrences of '@' below this line.
@@ -18,6 +21,8 @@ setClass("experiment",
 
 setValidity("experiment" , .experiment_valid)
 
+
+#' @export
 "experiment" <- function(mm,obs){
   new("experiment",mm=mm,obs=obs)
 }
@@ -26,6 +31,7 @@ setValidity("experiment" , .experiment_valid)
   as.data.frame(x)
 }
     
+#' @export
 "print.experiment" <- function(x, ...){
   jj <- .experiment_print(x, ...)
   print(jj)
