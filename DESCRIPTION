@@ -12,6 +12,6 @@ License: GPL-2
 LazyLoad: yes
 LazyData: yes
 URL: https://github.com/RobinHankin/multivator
-BugReports: https://github.com/RobinHankin/multivator
+BugReports: https://github.com/RobinHankin/multivator/issues
 Encoding: UTF-8
 Config/roxygen2/version: 8.1.0
