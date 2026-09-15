@@ -14,7 +14,7 @@
 \newcommand{\cias}{\proglang{CIAS}}
 
 %% just as usual
-\author{Robin K. S. Hankin\\Auckland University of Technology}
+\author{Robin K. S. Hankin\\University of Stirling}
 \title{Package \pkg{multivator} applied to modular systems such as \cias}
 %\VignetteIndexEntry{cias}
 

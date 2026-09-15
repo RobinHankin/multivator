@@ -81,11 +81,8 @@
 %% in the following format:
 \Address{
   Robin K. S. Hankin\\
-  Auckland University of Technology\\
-  School of Computing and Mathematical Sciences\\
-  Wakefield Street\\
-  Auckland\\
-  New Zealand\\
+  University of Stirling\\
+  Scotland\\
   E-mail: \email{hankin.robin@gmail.com}
 }
 %% It is also possible to add a telephone and fax number
